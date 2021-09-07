@@ -1,11 +1,37 @@
 import React, {FC} from 'react';
-import {Layout, Row} from 'antd';
+import {Layout, Menu, Row} from 'antd';
+import {useHistory} from 'react-router-dom';
+import {RouteNames} from '../routes';
 
 const Navbar: FC = () => {
+    const router = useHistory();
+    const isAuth = true;
+    console.log(router)
     return (
         <Layout.Header>
             <Row justify='end'>
-
+                {isAuth ?
+                    <>
+                        <div style={{color: 'white'}}>
+                            Pistoletik666
+                        </div>
+                        <Menu theme='dark' mode='horizontal' selectable={false}>
+                            <Menu.Item onClick={() => console.log('LOGOUT')}
+                                       key='1'
+                            >
+                                Sign Out
+                            </Menu.Item>
+                        </Menu>
+                    </>
+                    :
+                    <Menu theme='dark' mode='horizontal' selectable={false}>
+                        <Menu.Item onClick={() => router.push(RouteNames.LOGIN)}
+                                   key='1'
+                        >
+                            Sign In
+                        </Menu.Item>
+                    </Menu>
+                }
             </Row>
         </Layout.Header>
     );
